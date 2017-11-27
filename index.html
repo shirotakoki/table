@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>test_1</title>
+    <script src='jquery-3.2.1.min.js'></script>
+    <script src='table.js'></script>
+    <link rel='stylesheet' href='table_test.css'>
+    <meta charset="Shift-JIS" />
+</head>
+
+<body>
+    <p>
+        <input type="button" value="表示設定" onClick="choseMonth()">
+    </p>
+    <p>表示したい月：
+        <br>
+        <select name="month" onChange="setMonth(06)">
+            <option value="05">5</option>
+            <option value="06">6</option>
+            <option value="07">7</option>
+            <option value="08">8</option>
+        </select>
+    </p>
+    <div id="sample">
+        <table border="1" bordercolor="black"></table>
+    </div>
+    <div id="nameData">
+    </div>
+</body>
+
+<script> 
+    var year;
+    var month;
+    var teachers
+    $(function test_0() {
+        $.when(
+            $.getJSON("https://private-anon-d524fdd736-funsys.apiary-mock.com/teachers"),
+            $.getJSON("https://private-anon-d524fdd736-funsys.apiary-mock.com/lectures"),
+            $.getJSON("https://private-anon-d524fdd736-funsys.apiary-mock.com/rooms"),
+            $.getJSON("https://private-anon-d524fdd736-funsys.apiary-mock.com/classes")
+        )
+            .done(function (teachers_raw, lectures_raw ,rooms_raw ,classes_raw ) {
+                // すべて成功した時の処理
+                var teachers = teachers_raw[0];
+                var lectures = lectures_raw[0];
+                var rooms = rooms_raw[0];
+                var classes = classes_raw[0];
+           })
+            .fail(function () {
+                // エラーがあった時
+                console.log('error');
+            });
+    })
+    /*$(function hyou() {
+        if (month == null) {
+            month = "05";
+        }
+        year = "2015";
+        var Url_1 = "http://www.akashi.ac.jp/data/cafemenu/cafemenu" + year + month + ".xml";
+        $.ajax({
+            url: Url_1,
+            type: 'GET',
+            dataType: 'xml',
+            timeout: 1000,
+            error: function () {
+                alert("ロード失敗");
+            },
+            success: function (xml) {
+                //aleart(JSON.stringify(json));
+                $("#sample table").append('<thead>');
+                $("#sample table").append('<tr>' + '<th>' + 'カテゴリ' + '</th>' + '<th>' + '名前' + '</th>' + '</tr>');
+                $("#sample table").append('</thead>');
+                $("#sample table").append('<tbody>');
+                $(xml).find("Meal").each(function () {
+                    $("#sample table").append('<tr>' + '<td>' + $(this).find('Category').text() + '</td>' + '<td>' + $(this).find('Name').text() + '</td>' + '</tr>');
+                });
+                $("#sample table").append('</tbody>');
+            }
+        });
+    });*/
+    function setMonth(tuki) {
+        this.month = tuki;
+        console.log(month);
+    }
+    function choseMonth() {
+        ret = confirm();
+        if (ret == true) {
+            location.href = "http://www.yahoo.co.jp/";
+        }
+    }
+</script>
+
+</html>

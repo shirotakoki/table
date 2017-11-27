@@ -1,0 +1,23 @@
+table {
+    margin-left: 10px;
+    margin-right: 10px;
+    border-collapse: collapse;
+    width: 800px;
+}
+
+table tr th,
+table tr td {
+    padding: 0 10px;
+    border: 1px solid #DDD;
+    vertical-align: middle;
+}
+table tr td:hover{
+    background: rgb(139, 139, 236);
+}
+
+table tr th{
+    text-align: center;
+    font-weight: bold;
+    height: 50px;
+    width: 40px;
+}
